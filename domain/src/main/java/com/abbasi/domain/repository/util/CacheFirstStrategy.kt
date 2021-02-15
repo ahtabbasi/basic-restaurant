@@ -1,8 +1,9 @@
 package com.abbasi.domain.repository.util
 
 import com.abbasi.domain.models.Resource
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.*
+import kotlin.coroutines.coroutineContext
 
 /**
  * This implementation of [CachedDataAccessStrategy] emits an empty [Resource.Loading] first
@@ -20,7 +21,24 @@ object CacheFirstStrategy : CachedDataAccessStrategy {
         getFromCache: (suspend () -> StateFlow<T>),
         getFromRemote: (() -> Flow<Resource<T>>),
         updateCache: (suspend (T) -> Unit)
-    ): StateFlow<Resource<T>> {
-        TODO("Not yet implemented")
-    }
+    ): StateFlow<Resource<T>> = flow {
+
+        getFromCache().take(1).collect { emit(Resource.Loading(it)) }
+
+        getFromRemote().collect { remoteResponse ->
+            if (remoteResponse !is Resource.Loading) {
+
+                if (remoteResponse is Resource.Valid)
+                    updateCache(remoteResponse.data)
+                else if (remoteResponse is Resource.Invalid)
+                    emit(Resource.Invalid<T>(remoteResponse.message))
+
+                emitAll(getFromCache().map { Resource.Valid(it) })
+            }
+        }
+    }.stateIn(
+        CoroutineScope(coroutineContext),
+        SharingStarted.Eagerly,
+        Resource.Loading()
+    )
 }

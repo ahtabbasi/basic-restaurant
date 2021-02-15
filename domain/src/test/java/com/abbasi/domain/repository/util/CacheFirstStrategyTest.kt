@@ -6,7 +6,6 @@ import com.abbasi.domain.models.getDataOrNull
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
 import kotlin.time.ExperimentalTime
 
@@ -19,7 +18,7 @@ class CacheFirstStrategyTest {
 
     @Test
     fun GivenEmptyCacheAndValidRemote_WhenGet_ThenResponseShouldBeLoadingLoadingValidAndCacheUpdated() =
-        runBlockingTest {
+        runBlocking {
 
             val testRemoteResponse = "remoteData"
 
@@ -32,13 +31,8 @@ class CacheFirstStrategyTest {
                     fake_getFromRemote,
                     fake_updateCache
                 ).test {
-                    // first, it will emit loading without reading cache
-                    expectItem().let {
-                        assertThat(it).isInstanceOf(Resource.Loading::class.java)
-                        assertThat(it.getDataOrNull()).isEqualTo(null)
-                    }
 
-                    // then, it will emit loading with data from cache
+                    // first, it will emit loading with data from cache
                     expectItem().let {
                         assertThat(it).isInstanceOf(Resource.Loading::class.java)
                         assertThat(it.getDataOrNull()).isEqualTo(null)
@@ -72,10 +66,6 @@ class CacheFirstStrategyTest {
                     fake_getFromRemote,
                     fake_updateCache
                 ).test {
-                    expectItem().let {
-                        assertThat(it).isInstanceOf(Resource.Loading::class.java)
-                        assertThat(it.getDataOrNull()).isEqualTo(null)
-                    }
 
                     expectItem().let {
                         assertThat(it).isInstanceOf(Resource.Loading::class.java)

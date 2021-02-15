@@ -6,12 +6,8 @@ class ProductUseCase constructor(
     private val productRepository: ProductRepository
 ) {
 
-    fun get(productId: String, categoryId: String) {
-        TODO("Not yet implemented")
-    }
+    suspend fun get(productId: String, categoryId: String) =
+        productRepository.get(productId, categoryId)
 
-    fun getByCategoryId(categoryId: String) {
-        TODO("Not yet implemented")
-    }
-
+    suspend fun getByCategoryId(categoryId: String) = productRepository.getByCategoryId(categoryId)
 }

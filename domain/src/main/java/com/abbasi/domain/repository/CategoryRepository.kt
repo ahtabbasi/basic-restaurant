@@ -9,7 +9,5 @@ interface CategoryRepository {
 
     suspend fun getAllWithProducts(dataStrategy: CachedDataAccessStrategy): StateFlow<Resource<List<Category>>>
 
-    suspend fun getFilteredProducts(query: String): StateFlow<Resource<List<Category>>>
-
     suspend fun cleanAllDataAndRepopulate(categoriesWithProducts: List<Category>)
 }

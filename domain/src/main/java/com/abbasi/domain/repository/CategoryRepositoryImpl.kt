@@ -14,15 +14,18 @@ class CategoryRepositoryImpl(
     private val productPDS: ProductPersistenceDataSource
 ) : CategoryRepository {
 
-    override suspend fun getAllWithProducts(dataStrategy: CachedDataAccessStrategy): StateFlow<Resource<List<Category>>> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getAllWithProducts(dataStrategy: CachedDataAccessStrategy) =
+        dataStrategy.performGetOperation(
+            getFromCache = { categoryPDS.getAllWithProducts() },
+            getFromRemote = { categoryRDS.getAll() },
+            updateCache = { cleanAllDataAndRepopulate(it) }
+        )
 
-    override suspend fun getFilteredProducts(query: String): StateFlow<Resource<List<Category>>> {
-        TODO("Not yet implemented")
-    }
 
     override suspend fun cleanAllDataAndRepopulate(categoriesWithProducts: List<Category>) {
-        TODO("Not yet implemented")
+        categoryPDS.deleteAll()
+        productPDS.deleteAll()
+        categoryPDS.saveAll(categoriesWithProducts)
+        productPDS.saveAll(categoriesWithProducts.flatMapTo(mutableListOf(), { it.products }))
     }
 }

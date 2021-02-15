@@ -4,7 +4,7 @@ import com.abbasi.domain.repository.ProductRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito
@@ -22,7 +22,7 @@ class ProductUseCaseTest {
 
     @Test
     fun get() {
-        runBlockingTest {
+        runBlocking {
             launch {
 
                 val productId = "productId"
@@ -32,13 +32,13 @@ class ProductUseCaseTest {
                 Mockito.verify(mockRepository).get(productId, categoryId)
                 this.cancel()
             }
-            return@runBlockingTest
+            return@runBlocking
         }
     }
 
     @Test
     fun getByCategoryId() {
-        runBlockingTest {
+        runBlocking {
             launch {
 
                 val categoryId = "categoryId"
@@ -47,7 +47,7 @@ class ProductUseCaseTest {
                 Mockito.verify(mockRepository).getByCategoryId(categoryId)
                 this.cancel()
             }
-            return@runBlockingTest
+            return@runBlocking
         }
     }
 }

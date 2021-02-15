@@ -14,7 +14,7 @@ import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import kotlin.time.ExperimentalTime
@@ -43,7 +43,7 @@ class CategoryRepositoryImplTest {
 
     @Test
     fun GivenOutdatedCacheAndValidRemoteResponse_WhenGetAll_ThenReturnRemoteResponseAndUpdateCache() =
-        runBlockingTest {
+        runBlocking {
 
             val testRemoteResponse = FakeDataUtil.getAllFakeCategories()
             fakeCategoryPersistenceDataSource.saveAll(listOf(FakeDataUtil.category1))
@@ -82,7 +82,7 @@ class CategoryRepositoryImplTest {
 
     @Test
     fun GivenDataCachedAndInvalidRemoteResponse_WhenGetAll_ThenReturnCachedData() =
-        runBlockingTest {
+        runBlocking {
 
             val cachedCategoriesWithProducts = listOf(FakeDataUtil.category1)
             val cachedProducts = listOf(FakeDataUtil.product1)
@@ -119,7 +119,7 @@ class CategoryRepositoryImplTest {
         }
 
     @Test
-    fun cleanAllDataAndRepopulate() = runBlockingTest {
+    fun cleanAllDataAndRepopulate() = runBlocking {
 
         // given
         val cachedCategoriesWithProducts = listOf(FakeDataUtil.category1)

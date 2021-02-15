@@ -10,7 +10,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
 import kotlin.time.ExperimentalTime
@@ -33,7 +32,7 @@ class ProductRepositoryImplTest {
 
     @Test
     fun GivenInvalidProductIdValidCategoryId_WhenGet_ThenInvalid() =
-        runBlockingTest {
+        runBlocking {
             val testProduct = FakeDataUtil.product1
             val products = listOf(testProduct)
             val validCategoryId = testProduct.categoryId
@@ -61,11 +60,12 @@ class ProductRepositoryImplTest {
                         this@launch.cancel()
                     }
             }
+            return@runBlocking
         }
 
     @Test
     fun GivenValidProductIdInvalidCategoryId_WhenGet_ThenInvalid() =
-        runBlockingTest {
+        runBlocking {
             val testProduct = FakeDataUtil.product1
             val products = listOf(testProduct)
             val validProductId = testProduct.id
@@ -93,11 +93,13 @@ class ProductRepositoryImplTest {
                         this@launch.cancel()
                     }
             }
+            return@runBlocking
+
         }
 
     @Test
     fun GivenInvalidProductIdInvalidCategoryId_WhenGet_ThenInvalid() =
-        runBlockingTest {
+        runBlocking {
 
             launch {
                 productRepository.get("RANDOM", "RANDOM")
@@ -121,11 +123,12 @@ class ProductRepositoryImplTest {
                         this@launch.cancel()
                     }
             }
+            return@runBlocking
         }
 
     @Test
     fun GivenValidProductIdValidCategoryId_WhenGet_ThenValid() =
-        runBlockingTest {
+        runBlocking {
             val testProduct = FakeDataUtil.product1
             val products = listOf(testProduct)
             val validProductId = testProduct.id
@@ -154,12 +157,13 @@ class ProductRepositoryImplTest {
                         this@launch.cancel()
                     }
             }
+            return@runBlocking
         }
 
 
     @Test
     fun GivenNoProductsAgainstCategoryId_WhenGetByCategoryId_ThenEmptyListValid() =
-        runBlockingTest {
+        runBlocking {
 
             launch {
                 productRepository.getByCategoryId("RANDOM")
@@ -184,12 +188,13 @@ class ProductRepositoryImplTest {
                         this@launch.cancel()
                     }
             }
+            return@runBlocking
         }
 
 
     @Test
     fun GivenValidCategoryIdAndProducts_WhenGetByCategoryId_ThenValidWithProducts() =
-        runBlockingTest {
+        runBlocking {
 
             val testCategory = FakeDataUtil.category1
             fakeProductPersistenceDataSource.saveAll(testCategory.products)
@@ -218,5 +223,6 @@ class ProductRepositoryImplTest {
                         this@launch.cancel()
                     }
             }
+            return@runBlocking
         }
 }

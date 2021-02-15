@@ -5,7 +5,7 @@ import com.abbasi.domain.repository.util.CacheFirstStrategy
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito
@@ -25,13 +25,13 @@ class CategoryUseCaseTest {
 
     @Test
     fun getAllProducts() {
-        runBlockingTest {
+        runBlocking {
             launch {
                 categoryUseCase.getAllWithProducts()
                 verify(mockRepository).getAllWithProducts(CacheFirstStrategy)
                 this.cancel()
             }
-            return@runBlockingTest
+            return@runBlocking
         }
     }
 }
