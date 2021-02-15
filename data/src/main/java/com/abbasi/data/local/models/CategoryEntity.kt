@@ -31,3 +31,5 @@ data class CategoryEntity(
     }
 
 }
+
+fun List<Category>.fromDomain() = this.map { CategoryEntity.fromDomain(it) }

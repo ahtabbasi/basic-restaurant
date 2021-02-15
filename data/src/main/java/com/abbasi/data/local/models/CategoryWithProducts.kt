@@ -12,3 +12,10 @@ data class CategoryWithProducts(
     )
     val products: List<ProductEntity>
 )
+
+fun CategoryWithProducts.toDomainModel() = this.let {
+    this.category.toDomainModel(this.products.toDomainModel())
+}
+fun List<CategoryWithProducts>.toDomainModel() = this.map {
+    it.toDomainModel()
+}

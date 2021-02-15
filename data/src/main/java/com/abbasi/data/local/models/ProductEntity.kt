@@ -38,3 +38,6 @@ data class ProductEntity(
         )
     }
 }
+
+fun List<ProductEntity>.toDomainModel() = this.map { it.toDomainModel() }
+fun List<Product>.fromDomain() = this.map { ProductEntity.fromDomain(it) }

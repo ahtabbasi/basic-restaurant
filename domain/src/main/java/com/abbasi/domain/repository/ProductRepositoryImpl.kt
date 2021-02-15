@@ -18,14 +18,14 @@ class ProductRepositoryImpl(
         emit(Resource.Loading())
         try {
             emitAll(productPDS.get(productId, categoryId).map { Resource.Valid(it) })
-        } catch (e: Exception) { //TODO: Implement invalid error in a better way
-            emit(Resource.Invalid("Unable to find the products"))//TODO: Extract in strings
+        } catch (e: Exception) {
+            emit(Resource.Invalid("Unable to find the products"))
         }
     }.stateIn(
         CoroutineScope(coroutineContext)
     )
 
-    override suspend fun getByCategoryId(categoryId: String) = flow<Resource<List<Product>>> {
+    override suspend fun getByCategoryId(categoryId: String) = flow {
         emit(Resource.Loading())
         emitAll(productPDS.getByCategoryId(categoryId).map { Resource.Valid(it) })
     }.stateIn(

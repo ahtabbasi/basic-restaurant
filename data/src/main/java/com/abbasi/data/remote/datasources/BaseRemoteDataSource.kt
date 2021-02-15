@@ -1,8 +1,8 @@
 package com.abbasi.data.remote.datasources
 
-import com.abbasi.domain.models.Resource
 import com.abbasi.data.utils.NetworkUtils.getErrorMessage
 import com.abbasi.data.utils.NetworkUtils.getNetworkErrorMessage
+import com.abbasi.domain.models.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
@@ -12,7 +12,7 @@ abstract class BaseRemoteDataSource {
     /**
      * This method  will safely invoke the remote api call and return a flow of [Resource]s
      */
-    fun <T : Any> safeApiCall( // TODO: Move this to a retrofit adapter
+    fun <T : Any> safeApiCall(
         call: suspend () -> Response<T>
     ): Flow<Resource<T>> =
         flow {
