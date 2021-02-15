@@ -6,11 +6,7 @@ class CategoryUseCase constructor(
     private val categoryRepository: CategoryRepository
 ) {
 
-    fun getAllProducts() {
-        TODO("Not yet implemented")
-    }
-
-    fun getFilteredProducts(query: String) {
+    fun getAllWithProducts() {
         TODO("Not yet implemented")
     }
 }

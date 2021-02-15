@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 interface CategoryPersistenceDataSource {
 
-    suspend fun getAll(): StateFlow<List<Category>>
+    suspend fun getAllWithProducts(): StateFlow<List<Category>>
 
     suspend fun saveAll(categories: List<Category>)
 

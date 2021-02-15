@@ -11,7 +11,7 @@ interface ProductPersistenceDataSource {
     /**
      * This will save all the products under the list of categories
      */
-    suspend fun saveAll(categories: List<Category>)
+    suspend fun saveAll(products: List<Product>)
 
     suspend fun deleteAll()
 
