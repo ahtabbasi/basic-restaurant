@@ -6,5 +6,9 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface CategoryRemoteDataSource {
+
+    /**
+     * Returns all the data from server
+     */
     fun getAll(): Flow<Resource<List<Category>>>
 }

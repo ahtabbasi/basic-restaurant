@@ -4,7 +4,6 @@ import java.io.IOException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-// TODO: These strings should be moved to strings.xml
 internal object NetworkUtils {
 
     private const val genericNetworkError = "An error occurred getting data from server."
@@ -15,7 +14,6 @@ internal object NetworkUtils {
         is UnknownHostException -> "Unable to connect to server."
         else -> genericNetworkError
     }
-
 
     fun getErrorMessage(httpCode: Int) = when (httpCode) {
         // User unauthorised error

@@ -12,7 +12,7 @@ abstract class BaseRemoteDataSource {
     /**
      * This method  will safely invoke the remote api call and return a flow of [Resource]s
      */
-    fun <T : Any> safeApiCall(
+    fun <T : Any> safeApiCall( // TODO: Move this to a retrofit adapter
         call: suspend () -> Response<T>
     ): Flow<Resource<T>> =
         flow {

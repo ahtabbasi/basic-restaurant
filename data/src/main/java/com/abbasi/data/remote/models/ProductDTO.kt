@@ -45,4 +45,7 @@ data class ProductDTO(
             )
         )
     }
+
 }
+
+fun List<ProductDTO>.toDomainModel() = this.map { it.toDomainModel() }

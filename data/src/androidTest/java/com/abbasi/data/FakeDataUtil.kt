@@ -4,8 +4,11 @@ import com.abbasi.data.local.models.CategoryEntity
 import com.abbasi.data.local.models.ProductEntity
 import com.abbasi.domain.models.Category
 import com.abbasi.domain.models.Product
+import com.google.common.io.Resources
+import java.io.File
 
 object FakeDataUtil {
+
     object Local {
         val product1 = ProductEntity(
             "1", "1", "Prod1", "url", "desc", "5", "EUR"
@@ -51,6 +54,18 @@ object FakeDataUtil {
 
         fun getAllFakeProducts() = listOf(product1, product2, product3)
         fun getAllFakeCategories() = listOf(category1, category2)
+    }
+
+    object Remote {
+        /**
+         * This returns a valid response from server
+         */
+        fun getValidJsonResponse(): String {
+            // Load the JSON response
+            val uri = Resources.getResource("validData.json")
+            val file = File(uri.path)
+            return String(file.readBytes())
+        }
     }
 
 }

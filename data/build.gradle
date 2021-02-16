@@ -14,6 +14,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "BASE_URL", "\"$rootProject.BASE_URL\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -69,6 +70,7 @@ dependencies {
     // Testing
     testImplementation 'junit:junit:4.13.2' //TODO: version
     androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'com.squareup.okhttp3:mockwebserver:4.9.0' // TODO: common with logging interceptor
     androidTestImplementation 'androidx.test.ext:junit:1.1.2' //TODO: version
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0" //TODO: version
     androidTestImplementation "com.google.truth:truth:1.0.1" //TODO: version
