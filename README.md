@@ -97,14 +97,23 @@ Most of the testing is stated-based by creating fakes or using InMemory RoomDB a
 - **Retrofit** - API Calls
 
 ## Future Enhancements
-1. Ids and prices shared by server are in string. They should be serialized to Long and Float when data is received using KSerializers.
-2. Comparator used in DataBoundRecyclerView should be dynamic. The data element should be able to pass a custom comparator using xml at the time of creation of adapter.
-3. Persistence data source should handle errors and return the data wrapped Resource objects like remote data source.
-4. Refresh and search features on Home Screen.
-5. WorkManager for background syncing of data.
-6. safeApi call can be moved to retrofit adapter
-7. Roboelectric for Data module tests
-8. Use hilt for testing dependencies
+These are the enhancements that are important but were left because of time constraints:
+
+### Testing
+1. Implement the remaining tests for data module and move all data module tests to local unit tests using Roboelectric.
+2. Test coverage of presentation module.
+3. Use hilt for testing dependencies
+
+### Other
+
+1.  WorkManager for background syncing of data.Ids and prices shared by server are in string. They should be serialized to Long and Float when data is received using KSerializers.
+2. Persistence data source should handle errors and return the data wrapped Resource objects like remote data source.
+3. BaseRemoteDataSource code can be moved to retrofit adapter
+4. Comparator used in DataBoundRecyclerView should be dynamic. The data element should be able to pass a custom comparator using xml at the time of creation of adapter.
+5. Refresh and search features on Home Screen.
+
+
+
 
 
 
