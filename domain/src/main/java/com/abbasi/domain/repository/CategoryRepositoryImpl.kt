@@ -7,8 +7,9 @@ import com.abbasi.domain.models.Category
 import com.abbasi.domain.models.Resource
 import com.abbasi.domain.repository.util.CachedDataAccessStrategy
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class CategoryRepositoryImpl(
+class CategoryRepositoryImpl @Inject constructor(
     private val categoryRDS: CategoryRemoteDataSource,
     private val categoryPDS: CategoryPersistenceDataSource,
     private val productPDS: ProductPersistenceDataSource

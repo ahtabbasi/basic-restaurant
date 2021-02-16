@@ -8,9 +8,10 @@ import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import javax.inject.Inject
 import kotlin.coroutines.coroutineContext
 
-class ProductRepositoryImpl(
+class ProductRepositoryImpl @Inject constructor(
     private val productPDS: ProductPersistenceDataSource
 ) : ProductRepository {
 

@@ -9,9 +9,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import javax.inject.Inject
 import kotlin.coroutines.coroutineContext
 
-class CategoryPersistenceDataSourceImpl(
+class CategoryPersistenceDataSourceImpl @Inject constructor(
     private val categoryDao: CategoryDao
 ) : CategoryPersistenceDataSource {
 

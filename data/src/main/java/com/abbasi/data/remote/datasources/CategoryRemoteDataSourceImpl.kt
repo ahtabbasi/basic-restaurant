@@ -5,8 +5,9 @@ import com.abbasi.data.remote.models.toDomainModel
 import com.abbasi.domain.datasources.remote.CategoryRemoteDataSource
 import com.abbasi.domain.models.transform
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class CategoryRemoteDataSourceImpl constructor(
+class CategoryRemoteDataSourceImpl @Inject constructor(
     private val apiClient: ApiClient
 ) : CategoryRemoteDataSource, BaseRemoteDataSource() {
 

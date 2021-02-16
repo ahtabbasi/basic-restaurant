@@ -1,8 +1,9 @@
 package com.abbasi.domain.usecases
 
 import com.abbasi.domain.repository.ProductRepository
+import javax.inject.Inject
 
-class ProductUseCase constructor(
+class ProductUseCase @Inject constructor(
     private val productRepository: ProductRepository
 ) {
 

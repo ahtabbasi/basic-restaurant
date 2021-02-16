@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -30,6 +32,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    hilt {
+        enableExperimentalClasspathAggregation = true // for multi module
+    }
+    lint {
+        // Because of enableExperimentalClasspathAggregation
+        // Remove when Android Gradle plugin version is upgraded to 7.0 or more
+        android.lintOptions.checkReleaseBuilds = false
+    }
 }
 
 dependencies {
@@ -42,4 +52,8 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 }
