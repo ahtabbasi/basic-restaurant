@@ -18,7 +18,7 @@ class ProductPersistenceDataSourceImpl @Inject constructor(
     override suspend fun get(productId: String, categoryId: String) =
         productDao.get(productId, categoryId).map {
             // returns null if no such record found
-            it?.toDomainModel()
+            it.toDomainModel()
         }.stateIn(
             CoroutineScope(coroutineContext)
         )

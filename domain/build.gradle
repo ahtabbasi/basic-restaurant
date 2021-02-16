@@ -20,9 +20,9 @@ dependencies {
 
 
     // Testing
-    testImplementation 'junit:junit:4.13.2' //TODO version
-    testImplementation "com.google.truth:truth:1.0.1" //TODO: version
-    testImplementation 'app.cash.turbine:turbine:0.4.0'
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "com.google.truth:truth:$truth_version"
+    testImplementation "app.cash.turbine:turbine:$turbine_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
-    testImplementation "org.mockito:mockito-core:3.5.13" //TODO: version
+    testImplementation "org.mockito:mockito-core:3.5.13"
 }

@@ -2,6 +2,7 @@ package com.abbasi.domain.repository.util
 
 import com.abbasi.domain.models.Resource
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlin.coroutines.coroutineContext
 
@@ -30,8 +31,10 @@ object CacheFirstStrategy : CachedDataAccessStrategy {
 
                 if (remoteResponse is Resource.Valid)
                     updateCache(remoteResponse.data)
-                else if (remoteResponse is Resource.Invalid)
+                else if (remoteResponse is Resource.Invalid) {
                     emit(Resource.Invalid<T>(remoteResponse.message))
+                    delay(500) // temporary fix
+                }
 
                 emitAll(getFromCache().map { Resource.Valid(it) })
             }

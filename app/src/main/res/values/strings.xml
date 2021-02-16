@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Basic Restaurant</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="cd_product_image">Product image</string>
+    <string name="please_choose_a_food_of_your_choice">Select to view details</string>
 </resources>

@@ -11,7 +11,7 @@ class FakeCategoryRemoteDataSource : CategoryRemoteDataSource {
     private var behavior = Behavior.SHOULD_RETURN_VALID_DATA
     private var validData = FakeDataUtil.getAllFakeCategories()
 
-    override fun getAll(): Flow<Resource<List<Category>>> = flow<Resource<List<Category>>> {
+    override fun getAll(): Flow<Resource<List<Category>>> = flow {
         emit(Resource.Loading())
         emit(
             when (behavior) {

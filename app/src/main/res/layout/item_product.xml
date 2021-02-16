@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.abbasi.basicrestaurant.utils.Utils" />
+
+        <variable
+            name="product"
+            type="com.abbasi.basicrestaurant.models.ProductUIModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvCategoryTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="@{product.name}"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/cvImageHolder"
+            app:layout_constraintStart_toStartOf="@+id/cvImageHolder"
+            app:layout_constraintTop_toBottomOf="@+id/cvImageHolder"
+            tools:text="Yummy Food" />
+
+        <com.google.android.material.card.MaterialCardView
+
+            android:id="@+id/cvImageHolder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{(view)-> product.onClick(view)}"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="#B2EEEEEE"
+            app:strokeWidth="1dp">
+
+
+            <ImageView
+                android:id="@+id/imageViewX"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:contentDescription="@string/cd_product_image"
+                app:imageUrl="@{Utils.INSTANCE.getAbsoluteUrl(product.url)}"
+                tools:srcCompat="@drawable/placeholder_image" />
+
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

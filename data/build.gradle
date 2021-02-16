@@ -74,13 +74,13 @@ dependencies {
 
 
     // Testing
-    testImplementation 'junit:junit:4.13.2' //TODO: version
+    testImplementation "junit:junit:$junit_version"
     androidTestImplementation 'androidx.test:runner:1.3.0'
-    androidTestImplementation 'com.squareup.okhttp3:mockwebserver:4.9.0' // TODO: common with logging interceptor
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2' //TODO: version
-    androidTestImplementation "androidx.arch.core:core-testing:2.1.0" //TODO: version
-    androidTestImplementation "com.google.truth:truth:1.0.1" //TODO: version
-    androidTestImplementation 'app.cash.turbine:turbine:0.4.0' //TODO: version
+    androidTestImplementation 'com.squareup.okhttp3:mockwebserver:4.9.0'
+    androidTestImplementation "androidx.test.ext:junit:$androidxjunit_version"
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+    androidTestImplementation "com.google.truth:truth:$truth_version"
+    androidTestImplementation "app.cash.turbine:turbine:$turbine_version"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
 
 }

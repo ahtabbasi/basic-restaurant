@@ -2,11 +2,9 @@ package com.abbasi.data.local.daos
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import app.cash.turbine.test
-import com.abbasi.data.local.BasicRestaurantDatabase
-import com.abbasi.data.local.daos.CategoryDao
-import com.abbasi.data.local.daos.ProductDao
-import com.abbasi.data.local.DBHelper
 import com.abbasi.data.FakeDataUtil
+import com.abbasi.data.local.BasicRestaurantDatabase
+import com.abbasi.data.local.DBHelper
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch

@@ -30,7 +30,7 @@ object NetworkModule {
         else HttpLoggingInterceptor.Level.NONE
 
         return OkHttpClient.Builder()
-            .callTimeout(25, TimeUnit.SECONDS) //TODO: Put in AppConfig constants
+            .callTimeout(25, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
             .addInterceptor(logger)
             .build()

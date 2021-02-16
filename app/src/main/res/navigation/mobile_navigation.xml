@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/homeFragment">
+
+
+    <action
+        android:id="@+id/action_global_productDetailFragment"
+        app:destination="@id/productDetailFragment"
+        app:enterAnim="@android:anim/fade_in" />
+
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.abbasi.basicrestaurant.presentation.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_categoryDetailFragment"
+            app:destination="@id/categoryDetailFragment"
+            app:enterAnim="@anim/slide_in_right" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/categoryDetailFragment"
+        android:name="com.abbasi.basicrestaurant.presentation.categorydetail.CategoryDetailFragment"
+        android:label="fragment_category_detail"
+        tools:layout="@layout/fragment_category_detail">
+        <argument
+            android:name="categoryId"
+            android:defaultValue=""
+            app:argType="string" />
+        <argument
+            android:name="categoryName"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.abbasi.basicrestaurant.presentation.productdetail.ProductDetailFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_product_detail">
+        <argument
+            android:name="productId"
+            android:defaultValue=""
+            app:argType="string" />
+        <argument
+            android:name="categoryId"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
+</navigation>

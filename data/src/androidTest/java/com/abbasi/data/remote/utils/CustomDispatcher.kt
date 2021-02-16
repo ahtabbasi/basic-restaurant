@@ -1,11 +1,9 @@
 package com.abbasi.data.remote.utils
 
 import com.abbasi.data.FakeDataUtil.Remote.getValidJsonResponse
-import com.google.common.io.Resources.getResource
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.RecordedRequest
-import java.io.File
 
 /**
  * Routes the request based on the path

@@ -173,13 +173,11 @@ class CacheFirstStrategyTest {
         }
 
     private val fake_getFromCache: (suspend () -> StateFlow<String?>) = {
-        println("fake_getFromCache: ${cacheData.value}")
         cacheData
     }
 
     private val fake_getFromRemote: (() -> Flow<Resource<String?>>) = {
         flow {
-            println("fake_getFromRemote: ${remoteData}")
             if (remoteData == null) emit(Resource.Invalid<String?>("Error: Invalid response "))
             else emit(Resource.Valid(remoteData))
         }

@@ -29,9 +29,6 @@ class CategoryRemoteDataSourceImplTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @get:Rule // TODO: Remove this
-    var mainCoroutineRule = MainCoroutineRule()
-
     lateinit var mockServer: MockWebServer
     private lateinit var apiClient: ApiClient
     private lateinit var categoryRDS: CategoryRemoteDataSourceImpl
