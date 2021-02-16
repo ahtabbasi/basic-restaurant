@@ -2,7 +2,17 @@
 
 It's an app built using the MVVM, Repository Pattern and Clean Architecture. It uses the [RestaurantProducts API](http://mobcategories.s3-website-eu-west-1.amazonaws.com/) and displays all the products of the restaurant under specific categories.
 
-# Key Features:
+## Index
+
+- [Key Features](#key-features)
+- [Architecture](#architecture)
+- [Testing Strategy](#testing-strategy)
+- [Screenshots](#screenshots)
+- [Libraries](#libraries)
+- [Future Enhancements](#future-enhancements)
+- [Known Bugs](#known-bugs)
+
+## Key Features
 1. **Separation of Concerns:** The app is built using Uncle Bob's clean architecture (see architecture section below)
 2. **No UI management code** left in activities and fragments by using ViewModels and DataBinding
 3. **Navigation logic** separated out using Navigation Component. All UI components are responsible for their own navigation based on the events known to them.
@@ -11,7 +21,7 @@ It's an app built using the MVVM, Repository Pattern and Clean Architecture. It 
 
 
 
-# Architecture
+## Architecture
 The app is built with scalability in mind. To maintain the separation of concerns, [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) by Robert C. Martin, is used. The diagram below shows how the clean architecture is mapped to this android application 
 
 <img src="images/clean.png" width=300>
@@ -50,7 +60,7 @@ Presentation module is dependent on both domain and data modules. Presentation m
 
 It is the job of presentation module to provide the data module implementations to domain module for business logic execution.
 
-# Testing Strategy
+## Testing Strategy
 
 Since the domain module is the most reusable module, it was given the most attention when testing. It was written using **TDD** and is **100%** tested.
 
@@ -71,11 +81,11 @@ Most of the testing is stated-based by creating fakes or using InMemory RoomDB a
 - **Turbine** - For easier testing of Kotlin flows.
 
 
-# Screenshots
+## Screenshots
 
 <img src="images/pixel1.png" width=200> <img src="images/pixel2.png" width=200> <img src="images/pixel3.png" width=200>
 
-# Libraries
+## Libraries
 
 - **Material Design** - UI design
 - **AndroidX** - ViewModel, LiveData
@@ -86,7 +96,7 @@ Most of the testing is stated-based by creating fakes or using InMemory RoomDB a
 - **Room** - Database Storage
 - **Retrofit** - API Calls
 
-# Future Enhancements
+## Future Enhancements
 1. Ids and prices shared by server are in string. They should be serialized to Long and Float when data is received using KSerializers.
 2. Comparator used in DataBoundRecyclerView should be dynamic. The data element should be able to pass a custom comparator using xml at the time of creation of adapter.
 3. Persistence data source should handle errors and return the data wrapped Resource objects like remote data source.
@@ -98,6 +108,6 @@ Most of the testing is stated-based by creating fakes or using InMemory RoomDB a
 
 
 
-# Known Bugs
+## Known Bugs
 1. **Snackbar Issue:** When internet is not available, CacheFirstStrategy emits an invalid resource with error message and immediately after, emits a Valid resource from cache. The time interval between both is very minute and StateFlow only holds the latest value. This causes the Invalid message to not reach UI and error is not shown. A temporary fix for now is done by adding a 500ms delay after emitting Invalid .
 
