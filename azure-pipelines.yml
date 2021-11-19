@@ -9,23 +9,36 @@ trigger:
 pool:
   vmImage: 'macos-latest'
 
-steps:
+stages:
 
-- task: Gradle@2
-  displayName: 'Unit tests task'
-  inputs:
-    workingDirectory: ''
-    gradleWrapperFile: 'gradlew'
-    gradleOptions: '-Xmx3072m'
-    publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
-    tasks: 'clean testDebugUnitTest'
-- task: Gradle@2
-  displayName: 'Asseble debug task'
-  inputs:
-    workingDirectory: ''
-    gradleWrapperFile: 'gradlew'
-    gradleOptions: '-Xmx3072m'
-    publishJUnitResults: false
-    testResultsFiles: '**/TEST-*.xml'
-    tasks: 'assembleDebug'
+- stage: UnitTestStage
+  displayName: 'Run Unit Tests Stage'
+  jobs:
+    - job: UnitTestJob
+      displayName: 'Run Unit Tests Job'
+      steps:
+        - task: Gradle@2
+          displayName: 'Unit Tests Task'
+          inputs:
+            workingDirectory: ''
+            gradleWrapperFile: 'gradlew'
+            gradleOptions: '-Xmx3072m'
+            publishJUnitResults: true
+            testResultsFiles: '**/TEST-*.xml'
+            tasks: 'clean testDebugUnitTest'
+  
+- stage: AssembleDebugStage
+  displayName: 'Assemble Debug Stage'
+  jobs:
+    - job: AssembleDebugJob
+      displayName: 'Assemble Debug Job'
+      steps:
+      - task: Gradle@2
+        displayName: 'Assemble Debug Task'
+        inputs:
+          workingDirectory: ''
+          gradleWrapperFile: 'gradlew'
+          gradleOptions: '-Xmx3072m'
+          publishJUnitResults: false
+          testResultsFiles: '**/TEST-*.xml'
+          tasks: 'assembleDebug'
