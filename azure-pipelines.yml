@@ -10,7 +10,18 @@ pool:
   vmImage: 'macos-latest'
 
 steps:
+
 - task: Gradle@2
+  displayName: 'Unit tests task'
+  inputs:
+    workingDirectory: ''
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    tasks: 'clean test --info'
+- task: Gradle@2
+  displayName: 'Asseble debug task'
   inputs:
     workingDirectory: ''
     gradleWrapperFile: 'gradlew'
