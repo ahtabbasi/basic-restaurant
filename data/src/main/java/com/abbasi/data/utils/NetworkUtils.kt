@@ -7,6 +7,9 @@ import java.net.UnknownHostException
 internal object NetworkUtils {
 
     private const val genericNetworkError = "An error occurred getting data from server."
+    private const val HTTP_CODE_UNAUTHORIZED = 401
+    private const val HTTP_CODE_TIME_OUT = 408
+    private const val HTTP_CODE_SERVER_ERROR = 500
 
     fun getNetworkErrorMessage(e: Exception) = when (e) {
         is IOException -> "Network not available."
@@ -17,11 +20,11 @@ internal object NetworkUtils {
 
     fun getErrorMessage(httpCode: Int) = when (httpCode) {
         // User unauthorised error
-        401 -> "You have been unauthorized."
+        HTTP_CODE_UNAUTHORIZED -> "You have been unauthorized."
         // Time out error
-        408 -> "Request timed out. Try again."
+        HTTP_CODE_TIME_OUT -> "Request timed out. Try again."
         // Internal server error
-        500 -> "A server error occurred."
+        HTTP_CODE_SERVER_ERROR -> "A server error occurred."
         // Any other error executing the API
         else -> genericNetworkError
     }

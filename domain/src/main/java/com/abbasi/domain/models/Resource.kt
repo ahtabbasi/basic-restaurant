@@ -1,6 +1,8 @@
 package com.abbasi.domain.models
 
-import com.abbasi.domain.models.Resource.*
+import com.abbasi.domain.models.Resource.Valid
+import com.abbasi.domain.models.Resource.Invalid
+import com.abbasi.domain.models.Resource.Loading
 
 /**
  * A generic data wrapper with 3 possible states : [Valid], [Invalid], [Loading]

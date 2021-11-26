@@ -10,6 +10,7 @@ object Utils {
 
     fun getAbsoluteUrl(relativeUrl: String) = BuildConfig.BASE_URL + relativeUrl
 
+    @Suppress("MagicNumber")
     fun loadImageViewWithGlide(iv: ImageView, url: String) {
         iv.apply {
 

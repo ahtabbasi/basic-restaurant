@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 
+@Suppress("UnnecessaryAbstractClass", "ForbiddenComment")
 abstract class BaseRemoteDataSource {
 
     /**

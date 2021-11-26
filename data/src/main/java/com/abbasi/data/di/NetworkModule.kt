@@ -21,6 +21,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+    private const val TIMEOUT_INTERVAL_SECONDS = 25L
+
     @Singleton
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
@@ -30,7 +32,7 @@ object NetworkModule {
         else HttpLoggingInterceptor.Level.NONE
 
         return OkHttpClient.Builder()
-            .callTimeout(25, TimeUnit.SECONDS)
+            .callTimeout(TIMEOUT_INTERVAL_SECONDS, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
             .addInterceptor(logger)
             .build()
