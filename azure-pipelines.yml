@@ -32,6 +32,7 @@ stages:
 
       - job: RunDetekt
         displayName: 'Run Detekt & Publish Reports'
+        steps:
           - task: Gradle@2
             displayName: 'Run Detekt'
             inputs:
