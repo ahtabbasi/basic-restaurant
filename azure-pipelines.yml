@@ -21,7 +21,7 @@ stages:
             displayName: 'Run Android Lint'
             inputs:
               gradleWrapperFile: 'gradlew'
-              tasks: 'lintStub'
+              tasks: 'lint'
               javaHomeOption: 'JDKVersion'
               jdkVersionOption: '11'
               jdkArchitectureOption: 'x64'
