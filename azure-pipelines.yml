@@ -22,6 +22,9 @@ stages:
             inputs:
               gradleWrapperFile: 'gradlew'
               tasks: 'lintStub'
+              javaHomeOption: 'JDKVersion'
+              jdkVersionOption: '11'
+              jdkArchitectureOption: 'x64'
 
           - task: PublishPipelineArtifact@1
             displayName: 'Publish Lint reports'
@@ -29,6 +32,9 @@ stages:
             inputs:
               path: 'app/build/reports/lint-results-stub.html'
               artifact: 'LintReport'
+              javaHomeOption: 'JDKVersion'
+              jdkVersionOption: '11'
+              jdkArchitectureOption: 'x64'
 
       - job: RunDetekt
         displayName: 'Run Detekt & Publish Reports'
@@ -38,12 +44,18 @@ stages:
             inputs:
               gradleWrapperFile: 'gradlew'
               tasks: 'detekt'
+              javaHomeOption: 'JDKVersion'
+              jdkVersionOption: '11'
+              jdkArchitectureOption: 'x64'
           - task: PublishPipelineArtifact@1
             displayName: 'Publish Detekt reports'
             condition: succeededOrFailed()
             inputs:
               path: 'app/build/reports/detekt.html'
               artifact: 'DetektReport'
+              javaHomeOption: 'JDKVersion'
+              jdkVersionOption: '11'
+              jdkArchitectureOption: 'x64'
 
 
   - stage: UnitTest
@@ -61,6 +73,9 @@ stages:
               publishJUnitResults: true
               testResultsFiles: '**/TEST-*.xml'
               tasks: 'clean testDebugUnitTest'
+              javaHomeOption: 'JDKVersion'
+              jdkVersionOption: '11'
+              jdkArchitectureOption: 'x64'
 
 
   - stage: AssembleDebug
@@ -72,9 +87,8 @@ stages:
         - task: Gradle@2
           displayName: 'Assemble Debug Task'
           inputs:
-            workingDirectory: ''
             gradleWrapperFile: 'gradlew'
-            gradleOptions: '-Xmx3072m'
-            publishJUnitResults: false
-            testResultsFiles: '**/TEST-*.xml'
             tasks: 'assembleDebug'
+            javaHomeOption: 'JDKVersion'
+            jdkVersionOption: '11'
+            jdkArchitectureOption: 'x64'
