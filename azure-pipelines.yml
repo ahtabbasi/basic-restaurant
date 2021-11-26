@@ -11,34 +11,69 @@ pool:
 
 stages:
 
-- stage: UnitTestStage
-  displayName: 'Run Unit Tests Stage'
-  jobs:
-    - job: UnitTestJob
-      displayName: 'Run Unit Tests Job'
-      steps:
+  - stage: CodeQuality
+      displayName: 'Check Code Quality'
+      jobs:
+        - job: RunLint
+          displayName: 'Run Lint & Publish Reports'
+          steps:
+            - task: Gradle@2
+              displayName: 'Run Android Lint'
+              inputs:
+                gradleWrapperFile: 'gradlew'
+                tasks: 'lintStub'
+
+            - task: PublishPipelineArtifact@1
+              displayName: 'Publish Lint reports'
+              condition: succeededOrFailed()
+              inputs:
+                path: 'app/build/reports/lint-results-stub.html'
+                artifact: 'LintReport'
+
+        - job: RunDetekt
+          displayName: 'Run Detekt & Publish Reports'
+            - task: Gradle@2
+              displayName: 'Run Detekt'
+              inputs:
+                gradleWrapperFile: 'gradlew'
+                tasks: 'detekt'
+            - task: PublishPipelineArtifact@1
+              displayName: 'Publish Detekt reports'
+              condition: succeededOrFailed()
+              inputs:
+                path: 'app/build/reports/detekt.html'
+                artifact: 'DetektReport'
+
+
+  - stage: UnitTest
+    displayName: 'Run Unit Tests Stage'
+    jobs:
+      - job: UnitTest
+        displayName: 'Run Unit Tests Job'
+        steps:
+          - task: Gradle@2
+            displayName: 'Unit Tests Task'
+            inputs:
+              workingDirectory: ''
+              gradleWrapperFile: 'gradlew'
+              gradleOptions: '-Xmx3072m'
+              publishJUnitResults: true
+              testResultsFiles: '**/TEST-*.xml'
+              tasks: 'clean testDebugUnitTest'
+
+
+  - stage: AssembleDebug
+    displayName: 'Assemble Debug Stage'
+    jobs:
+      - job: AssembleDebug
+        displayName: 'Assemble Debug Job'
+        steps:
         - task: Gradle@2
-          displayName: 'Unit Tests Task'
+          displayName: 'Assemble Debug Task'
           inputs:
             workingDirectory: ''
             gradleWrapperFile: 'gradlew'
             gradleOptions: '-Xmx3072m'
-            publishJUnitResults: true
+            publishJUnitResults: false
             testResultsFiles: '**/TEST-*.xml'
-            tasks: 'clean testDebugUnitTest'
-  
-- stage: AssembleDebugStage
-  displayName: 'Assemble Debug Stage'
-  jobs:
-    - job: AssembleDebugJob
-      displayName: 'Assemble Debug Job'
-      steps:
-      - task: Gradle@2
-        displayName: 'Assemble Debug Task'
-        inputs:
-          workingDirectory: ''
-          gradleWrapperFile: 'gradlew'
-          gradleOptions: '-Xmx3072m'
-          publishJUnitResults: false
-          testResultsFiles: '**/TEST-*.xml'
-          tasks: 'assembleDebug'
+            tasks: 'assembleDebug'
