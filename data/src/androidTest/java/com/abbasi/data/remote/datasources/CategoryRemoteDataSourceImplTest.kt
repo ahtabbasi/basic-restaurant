@@ -49,13 +49,13 @@ class CategoryRemoteDataSourceImplTest {
         val output = categoryRDS.getAll()
         output.test(timeout = 30.seconds) {
             // first emits loading
-            expectItem().let {
+            awaitItem().let {
                 Truth.assertThat(it).isInstanceOf(Resource.Loading::class.java)
                 Truth.assertThat(it.getDataOrNull()).isEqualTo(null)
             }
 
             // then emits valid
-            expectItem().let {
+            awaitItem().let {
                 Truth.assertThat(it).isInstanceOf(Resource.Valid::class.java)
                 Truth.assertThat(it.getDataOrNull()?.size).isGreaterThan(0)
             }

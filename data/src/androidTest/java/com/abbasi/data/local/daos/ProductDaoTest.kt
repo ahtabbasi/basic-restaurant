@@ -45,7 +45,7 @@ class ProductDaoTest {
                 inputData.id, inputData.categoryId
             ).test {
 
-                val outputData = expectItem()
+                val outputData = awaitItem()
                 Truth.assertThat(outputData.id).isEqualTo(inputData.id)
                 Truth.assertThat(outputData.categoryId).isEqualTo(inputData.categoryId)
             }
@@ -63,7 +63,7 @@ class ProductDaoTest {
 
             productDao.getByCategoryId("1").test {
 
-                val output = expectItem()
+                val output = awaitItem()
                 Truth.assertThat(output).hasSize(2)
             }
         }
@@ -81,7 +81,7 @@ class ProductDaoTest {
 
             productDao.get(inputData.id, inputData.categoryId).test {
 
-                val categories = expectItem()
+                val categories = awaitItem()
                 Truth.assertThat(categories).isEqualTo(null)
             }
         }

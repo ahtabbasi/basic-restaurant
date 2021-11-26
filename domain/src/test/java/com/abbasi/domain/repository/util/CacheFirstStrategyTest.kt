@@ -33,13 +33,13 @@ class CacheFirstStrategyTest {
                 ).test {
 
                     // first, it will emit loading with data from cache
-                    expectItem().let {
+                    awaitItem().let {
                         assertThat(it).isInstanceOf(Resource.Loading::class.java)
                         assertThat(it.getDataOrNull()).isEqualTo(null)
                     }
 
                     // then, it will emit valid with data from remote
-                    expectItem().let {
+                    awaitItem().let {
                         assertThat(it).isInstanceOf(Resource.Valid::class.java)
                         assertThat(it.getDataOrNull()).isEqualTo(remoteData)
                     }
@@ -67,16 +67,16 @@ class CacheFirstStrategyTest {
                     fake_updateCache
                 ).test {
 
-                    expectItem().let {
+                    awaitItem().let {
                         assertThat(it).isInstanceOf(Resource.Loading::class.java)
                         assertThat(it.getDataOrNull()).isEqualTo(null)
                     }
 
-                    expectItem().let {
+                    awaitItem().let {
                         assertThat(it).isInstanceOf(Resource.Invalid::class.java)
                     }
 
-                    expectItem().let {
+                    awaitItem().let {
                         assertThat(it).isInstanceOf(Resource.Valid::class.java)
                         assertThat(it.getDataOrNull()).isEqualTo(null)
                     }
@@ -105,17 +105,17 @@ class CacheFirstStrategyTest {
                     fake_getFromRemote,
                     fake_updateCache
                 ).test {
-                    expectItem().let {
+                    awaitItem().let {
                         assertThat(it).isInstanceOf(Resource.Loading::class.java)
                         assertThat(it.getDataOrNull()).isEqualTo(null)
                     }
 
-                    expectItem().let {
+                    awaitItem().let {
                         assertThat(it).isInstanceOf(Resource.Loading::class.java)
                         assertThat(it.getDataOrNull()).isEqualTo(testOutdatedCacheData)
                     }
 
-                    expectItem().let {
+                    awaitItem().let {
                         assertThat(it).isInstanceOf(Resource.Valid::class.java)
                         assertThat(it.getDataOrNull()).isEqualTo(testRemoteResponse)
                     }
@@ -144,22 +144,22 @@ class CacheFirstStrategyTest {
                     fake_updateCache
                 ).test {
 
-                    expectItem().let {
+                    awaitItem().let {
                         assertThat(it).isInstanceOf(Resource.Loading::class.java)
                         assertThat(it.getDataOrNull()).isEqualTo(null)
                     }
 
-                    expectItem().let {
+                    awaitItem().let {
                         assertThat(it).isInstanceOf(Resource.Loading::class.java)
                         assertThat(it.getDataOrNull()).isEqualTo(testOutdatedCacheData)
                     }
 
-                    expectItem().let {
+                    awaitItem().let {
                         assertThat(it).isInstanceOf(Resource.Invalid::class.java)
                         assertThat(it.getDataOrNull()).isEqualTo(null)
                     }
 
-                    expectItem().let {
+                    awaitItem().let {
                         assertThat(it).isInstanceOf(Resource.Valid::class.java)
                         assertThat(it.getDataOrNull()).isEqualTo(testOutdatedCacheData)
                     }

@@ -57,9 +57,9 @@ class CategoryRepositoryImplTest {
                     .test {
 
                         //iterate all till valid response is received..
-                        var resource = expectItem()
+                        var resource = awaitItem()
                         while (resource !is Resource.Valid) {
-                            resource = expectItem()
+                            resource = awaitItem()
                         }
 
                         assertThat(resource.getDataOrNull()).isEqualTo(testRemoteResponse)
@@ -97,9 +97,9 @@ class CategoryRepositoryImplTest {
                     .test {
 
                         //iterate all till valid response is received..
-                        var resource = expectItem()
+                        var resource = awaitItem()
                         while (resource !is Resource.Valid) {
-                            resource = expectItem()
+                            resource = awaitItem()
                         }
 
                         assertThat(resource.getDataOrNull()).isEqualTo(cachedCategoriesWithProducts)

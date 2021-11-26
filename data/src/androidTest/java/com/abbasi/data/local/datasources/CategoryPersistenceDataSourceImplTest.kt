@@ -53,7 +53,7 @@ class CategoryPersistenceDataSourceImplTest {
 
             categoryPDS.getAllWithProducts().test {
 
-                val outputCategories = expectItem()
+                val outputCategories = awaitItem()
                 assertThat(outputCategories).hasSize(inputCategories.size)
                 assertThat(outputCategories.first().id).isEqualTo(inputCategories.first().id)
                 assertThat(outputCategories.last().id).isEqualTo(inputCategories.last().id)
@@ -76,7 +76,7 @@ class CategoryPersistenceDataSourceImplTest {
 
         val job = launch {
             categoryDao.getAllCategoriesWithProducts().test {
-                val output = expectItem()
+                val output = awaitItem()
                 val outputCategories = output.map { it.category }
                 assertThat(outputCategories).hasSize(inputCategories.size)
                 assertThat(outputCategories.first().id).isEqualTo(inputCategories.first().id)
@@ -102,7 +102,7 @@ class CategoryPersistenceDataSourceImplTest {
 
             categoryPDS.getFilteredProducts(inputSearchQuery).test {
 
-                val outputProducts = expectItem().flatMap { it.products }
+                val outputProducts = awaitItem().flatMap { it.products }
                 assertThat(!outputProducts.any {
                     !it.name.contains("dd")
                 })
@@ -123,7 +123,7 @@ class CategoryPersistenceDataSourceImplTest {
 
             categoryDao.getAllCategoriesWithProducts().test {
 
-                val categories = expectItem().map { it.category }
+                val categories = awaitItem().map { it.category }
                 assertThat(categories).hasSize(0)
             }
         }

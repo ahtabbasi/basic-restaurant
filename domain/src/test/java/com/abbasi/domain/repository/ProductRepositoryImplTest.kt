@@ -42,7 +42,7 @@ class ProductRepositoryImplTest {
                 productRepository.get("RANDOM", validCategoryId)
                     .test {
 
-                        var resource = expectItem()
+                        var resource = awaitItem()
 
                         // first loading with empty data
                         Truth.assertThat(resource).isInstanceOf(Resource.Loading::class.java)
@@ -51,7 +51,7 @@ class ProductRepositoryImplTest {
 
                         // iterate all till invalid response is received..
                         while (resource !is Resource.Invalid) {
-                            resource = expectItem()
+                            resource = awaitItem()
                         }
 
                         Truth.assertThat(resource.getDataOrNull()).isEqualTo(null)
@@ -75,7 +75,7 @@ class ProductRepositoryImplTest {
                 productRepository.get(validProductId, "RANDOM")
                     .test {
 
-                        var resource = expectItem()
+                        var resource = awaitItem()
 
                         // first loading with empty data
                         Truth.assertThat(resource).isInstanceOf(Resource.Loading::class.java)
@@ -84,7 +84,7 @@ class ProductRepositoryImplTest {
 
                         // iterate all till invalid response is received..
                         while (resource !is Resource.Invalid) {
-                            resource = expectItem()
+                            resource = awaitItem()
                         }
 
                         Truth.assertThat(resource.getDataOrNull()).isEqualTo(null)
@@ -105,7 +105,7 @@ class ProductRepositoryImplTest {
                 productRepository.get("RANDOM", "RANDOM")
                     .test {
 
-                        var resource = expectItem()
+                        var resource = awaitItem()
 
                         // first loading with empty data
                         Truth.assertThat(resource).isInstanceOf(Resource.Loading::class.java)
@@ -114,7 +114,7 @@ class ProductRepositoryImplTest {
 
                         // iterate all till invalid response is received..
                         while (resource !is Resource.Invalid) {
-                            resource = expectItem()
+                            resource = awaitItem()
                         }
 
                         Truth.assertThat(resource.getDataOrNull()).isEqualTo(null)
@@ -139,7 +139,7 @@ class ProductRepositoryImplTest {
                 productRepository.get(validProductId, validCategoryId)
                     .test {
 
-                        var resource = expectItem()
+                        var resource = awaitItem()
 
                         // first loading with empty data
                         Truth.assertThat(resource).isInstanceOf(Resource.Loading::class.java)
@@ -148,7 +148,7 @@ class ProductRepositoryImplTest {
 
                         // iterate all till invalid response is received..
                         while (resource !is Resource.Valid) {
-                            resource = expectItem()
+                            resource = awaitItem()
                         }
 
                         Truth.assertThat(resource.getDataOrNull()).isEqualTo(testProduct)
@@ -169,7 +169,7 @@ class ProductRepositoryImplTest {
                 productRepository.getByCategoryId("RANDOM")
                     .test {
 
-                        var resource = expectItem()
+                        var resource = awaitItem()
 
                         // first loading with empty data
                         Truth.assertThat(resource).isInstanceOf(Resource.Loading::class.java)
@@ -178,7 +178,7 @@ class ProductRepositoryImplTest {
 
                         // iterate all till invalid response is received..
                         while (resource !is Resource.Valid) {
-                            resource = expectItem()
+                            resource = awaitItem()
                         }
 
                         Truth.assertThat(resource.getDataOrNull()).isInstanceOf(List::class.java)
@@ -203,7 +203,7 @@ class ProductRepositoryImplTest {
                 productRepository.getByCategoryId(testCategory.id)
                     .test {
 
-                        var resource = expectItem()
+                        var resource = awaitItem()
 
                         // first loading with empty data
                         Truth.assertThat(resource).isInstanceOf(Resource.Loading::class.java)
@@ -212,7 +212,7 @@ class ProductRepositoryImplTest {
 
                         // iterate all till invalid response is received..
                         while (resource !is Resource.Valid) {
-                            resource = expectItem()
+                            resource = awaitItem()
                         }
 
                         Truth.assertThat(resource.getDataOrNull()).isInstanceOf(List::class.java)

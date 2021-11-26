@@ -44,7 +44,7 @@ class ProductPersistenceDataSourceImplTest {
 
         val job = launch {
             productDao.get(input.id, input.categoryId).test {
-                val output = expectItem()
+                val output = awaitItem()
 
                 Truth.assertThat(output.id).isEqualTo(input.id)
                 Truth.assertThat(output.categoryId).isEqualTo(input.categoryId)
@@ -64,7 +64,7 @@ class ProductPersistenceDataSourceImplTest {
 
         val job = launch {
             productDao.get(input.id, input.categoryId).test {
-                val output = expectItem()
+                val output = awaitItem()
 
                 Truth.assertThat(output.id).isEqualTo(input.id)
                 Truth.assertThat(output.categoryId).isEqualTo(input.categoryId)
@@ -86,7 +86,7 @@ class ProductPersistenceDataSourceImplTest {
 
             productDao.getByCategoryId(inputData.first().categoryId).test {
 
-                val output = expectItem()
+                val output = awaitItem()
                 Truth.assertThat(output).hasSize(0)
             }
         }
@@ -102,7 +102,7 @@ class ProductPersistenceDataSourceImplTest {
 
         val job = launch {
             productPDS.getByCategoryId("1").test {
-                val output = expectItem()
+                val output = awaitItem()
 
                 Truth.assertThat(output).hasSize(2)
             }

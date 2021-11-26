@@ -44,7 +44,7 @@ class CategoryDaoTest {
 
             categoryDao.getAllCategoriesWithProducts().test {
 
-                val outputData = expectItem().map { it.category }
+                val outputData = awaitItem().map { it.category }
                 assertThat(outputData).hasSize(inputData.size)
                 assertThat(outputData).isEqualTo(inputData)
             }
@@ -65,7 +65,7 @@ class CategoryDaoTest {
 
             categoryDao.getAllCategoriesWithProducts().test {
 
-                val item = expectItem()
+                val item = awaitItem()
                 val outputCategories = item.map { it.category }
                 assertThat(outputCategories).hasSize(inputCategories.size)
                 assertThat(outputCategories).isEqualTo(inputCategories)
@@ -92,7 +92,7 @@ class CategoryDaoTest {
 
             categoryDao.getFilteredProducts(inputSearchQuery).test {
 
-                val outputProducts = expectItem().flatMap { it.products }
+                val outputProducts = awaitItem().flatMap { it.products }
                 assertThat(!outputProducts.any {
                     !it.name.contains("dd")
                 })
@@ -113,7 +113,7 @@ class CategoryDaoTest {
 
             categoryDao.getAllCategoriesWithProducts().test {
 
-                val categories = expectItem().map { it.category }
+                val categories = awaitItem().map { it.category }
                 assertThat(categories).hasSize(0)
             }
         }

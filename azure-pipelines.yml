@@ -72,7 +72,7 @@ stages:
               gradleOptions: '-Xmx3072m'
               publishJUnitResults: true
               testResultsFiles: '**/TEST-*.xml'
-              tasks: 'clean testDebugUnitTest'
+              tasks: 'clean test'
               javaHomeOption: 'JDKVersion'
               jdkVersionOption: '11'
               jdkArchitectureOption: 'x64'
