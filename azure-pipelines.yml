@@ -30,7 +30,7 @@ stages:
             displayName: 'Publish Lint reports'
             condition: succeededOrFailed()
             inputs:
-              path: 'app/build/reports/lint-results-stub.html'
+              path: 'app/build/reports/lint-results-debug.html'
               artifact: 'LintReport'
               javaHomeOption: 'JDKVersion'
               jdkVersionOption: '11'
@@ -51,7 +51,7 @@ stages:
             displayName: 'Publish Detekt reports'
             condition: succeededOrFailed()
             inputs:
-              path: 'app/build/reports/detekt.html'
+              path: 'app/build/reports/detekt/detekt.html'
               artifact: 'DetektReport'
               javaHomeOption: 'JDKVersion'
               jdkVersionOption: '11'
