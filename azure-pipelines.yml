@@ -12,37 +12,37 @@ pool:
 stages:
 
   - stage: CodeQuality
-      displayName: 'Check Code Quality'
-      jobs:
-        - job: RunLint
-          displayName: 'Run Lint & Publish Reports'
-          steps:
-            - task: Gradle@2
-              displayName: 'Run Android Lint'
-              inputs:
-                gradleWrapperFile: 'gradlew'
-                tasks: 'lintStub'
+    displayName: 'Check Code Quality'
+    jobs:
+      - job: RunLint
+        displayName: 'Run Lint & Publish Reports'
+        steps:
+          - task: Gradle@2
+            displayName: 'Run Android Lint'
+            inputs:
+              gradleWrapperFile: 'gradlew'
+              tasks: 'lintStub'
 
-            - task: PublishPipelineArtifact@1
-              displayName: 'Publish Lint reports'
-              condition: succeededOrFailed()
-              inputs:
-                path: 'app/build/reports/lint-results-stub.html'
-                artifact: 'LintReport'
+          - task: PublishPipelineArtifact@1
+            displayName: 'Publish Lint reports'
+            condition: succeededOrFailed()
+            inputs:
+              path: 'app/build/reports/lint-results-stub.html'
+              artifact: 'LintReport'
 
-        - job: RunDetekt
-          displayName: 'Run Detekt & Publish Reports'
-            - task: Gradle@2
-              displayName: 'Run Detekt'
-              inputs:
-                gradleWrapperFile: 'gradlew'
-                tasks: 'detekt'
-            - task: PublishPipelineArtifact@1
-              displayName: 'Publish Detekt reports'
-              condition: succeededOrFailed()
-              inputs:
-                path: 'app/build/reports/detekt.html'
-                artifact: 'DetektReport'
+      - job: RunDetekt
+        displayName: 'Run Detekt & Publish Reports'
+          - task: Gradle@2
+            displayName: 'Run Detekt'
+            inputs:
+              gradleWrapperFile: 'gradlew'
+              tasks: 'detekt'
+          - task: PublishPipelineArtifact@1
+            displayName: 'Publish Detekt reports'
+            condition: succeededOrFailed()
+            inputs:
+              path: 'app/build/reports/detekt.html'
+              artifact: 'DetektReport'
 
 
   - stage: UnitTest
