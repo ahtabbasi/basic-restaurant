@@ -59,13 +59,13 @@ stages:
 
 
   - stage: UnitTest
-    displayName: 'Run Unit Tests Stage'
+    displayName: 'Run Unit Tests'
     jobs:
       - job: UnitTest
-        displayName: 'Run Unit Tests Job'
+        displayName: 'Run Unit Tests'
         steps:
           - task: Gradle@2
-            displayName: 'Unit Tests Task'
+            displayName: 'Unit Tests'
             inputs:
               workingDirectory: ''
               gradleWrapperFile: 'gradlew'
@@ -76,19 +76,24 @@ stages:
               javaHomeOption: 'JDKVersion'
               jdkVersionOption: '11'
               jdkArchitectureOption: 'x64'
-
+    #TODO: Publish unit test results
 
   - stage: AssembleDebug
-    displayName: 'Assemble Debug Stage'
+    displayName: 'Debug APK'
     jobs:
       - job: AssembleDebug
-        displayName: 'Assemble Debug Job'
+        displayName: 'Assemble Debug'
         steps:
         - task: Gradle@2
-          displayName: 'Assemble Debug Task'
+          displayName: 'Assemble Debug'
           inputs:
             gradleWrapperFile: 'gradlew'
             tasks: 'assembleDebug'
             javaHomeOption: 'JDKVersion'
             jdkVersionOption: '11'
             jdkArchitectureOption: 'x64'
+        - task: PublishPipelineArtifact@1
+          displayName: 'Publish Debug'
+          inputs:
+            targetPath: "app/build/outputs/apk/"
+            artifact: 'DebugBuild'
